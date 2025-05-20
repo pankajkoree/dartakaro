@@ -40,3 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 things-to-consider.docx
+things-to-consider.pdf
+~$ings-to-consider.docx
