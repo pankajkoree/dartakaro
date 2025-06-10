@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const Register = () => {
   const [user, setUser] = useState({
+    userImage: null,
     firstName: "",
     lastName: "",
     email: "",
@@ -17,7 +18,32 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = re.test(user.email);
+    if (
+      user.userImage !== null &&
+      user.firstName !== "" &&
+      user.lastName !== "" &&
+      isEmailValid &&
+      user.phone !== "" &&
+      user.age !== "" &&
+      user.gender !== "" &&
+      user.maritalStatus !== ""
+    ) {
+      console.log(user);
+    } else if (user.userImage === null) {
+      console.log("please upload the image");
+    } else if (!isEmailValid) {
+      console.log("Not valid email");
+    } else if (user.firstName === "") {
+      console.log("please enter firstname");
+    } else if (user.lastName === "") {
+      console.log("please enter lastname");
+    } else if (user.phone === "") {
+      console.log("please enter phone");
+    } else if (user.age === "") {
+      console.log("please enter age");
+    }
   };
   return (
     <div className="relative flex flex-col justify-center items-center">
@@ -25,8 +51,20 @@ const Register = () => {
         <h1 className="xl:text-4xl">Register</h1>
         <form
           onSubmit={handleSubmit}
-          className="relative flex flex-col text-xl gap-2 xl:w-full"
+          className="relative flex flex-col text-xl gap-2 xl:w-full mt-8"
         >
+          <div className="relative flex flex-col justify-center items-center">
+            <label>Upload the image</label>
+            <input
+              id={user.userImage}
+              type="file"
+              name="userImage"
+              placeholder="uplaod the image"
+              accept="image/*"
+              onChange={(e) => setUser({ ...user, image: e.target.files[0] })}
+              className="relative flex text-xl border-2 xl:w-[30%] xl:h-[120px] left-30"
+            />
+          </div>
           <div>
             <label>Firstname</label>
             <Input
