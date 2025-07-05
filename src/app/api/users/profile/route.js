@@ -1,6 +1,6 @@
 import User from "@/models/userModel";
 import { NextResponse } from "next/server";
-const { connectToTheDatabase } = require("@/database/databaseConfiguration");
+import { connectToTheDatabase } from "@/database/databaseConfiguration";
 
 connectToTheDatabase();
 
