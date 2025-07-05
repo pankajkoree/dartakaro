@@ -11,12 +11,12 @@ export async function connectToTheDatabase() {
   }
 
   try {
-    const connection = await mongoose.connect(MONGOURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    await mongoose.connect(MONGOURI, {
       serverSelectionTimeoutMS: 1000,
       socketTimeoutMS: 1000,
     });
+
+    const connection = mongoose.connection;
 
     connection.on("connected", () => {
       console.log("Database connected successfully...");
@@ -24,6 +24,7 @@ export async function connectToTheDatabase() {
 
     connection.on("error", (err) => {
       console.log("Error while connecting to the database... " + err);
+      process.exit(1);
     });
   } catch (error) {
     console.log("Error occurred during database connection..." + error);
