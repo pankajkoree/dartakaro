@@ -12,6 +12,7 @@ export async function connectToTheDatabase() {
 
   try {
     await mongoose.connect(MONGOURI, {
+      // don't add unnecessary things here
       serverSelectionTimeoutMS: 1000,
       socketTimeoutMS: 1000,
     });
